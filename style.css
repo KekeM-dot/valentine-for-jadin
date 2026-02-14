@@ -1,0 +1,167 @@
+body {
+  background: linear-gradient(#ffe6f0, #ffd6e8);
+  font-family: "Comic Sans MS", "Arial Rounded MT Bold", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Card */
+.card {
+  background: #fff0f6;
+  border: 3px solid #ff99cc;
+  border-radius: 25px;
+  padding: 25px;
+  text-align: center;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.kitty-img {
+  width: 150px;
+}
+
+/* Kitty affirmation */
+.affirmation-kitty {
+  color: #ff66a3;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+.kitty-name {
+  font-size: 18px;
+  color: #ff4d88;
+  animation: typing 3s steps(6) infinite;
+  overflow: hidden;
+  border-right: 2px solid pink;
+  width: 5ch;
+  margin: auto;
+}
+
+@keyframes typing {
+  0% { width: 0 }
+  50% { width: 5ch }
+  100% { width: 0 }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Floating affirmations */
+.affirmation {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #cc3366;
+  font-weight: bold;
+  animation: floatUp 3s ease forwards;
+}
+
+@keyframes floatUp {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -80px);
+  }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  animation: sparkle 1s ease forwards;
+}
+
+@keyframes sparkle {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Record Player */
+.player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff0f6;
+  border: 3px solid #ff99cc;
+  border-radius: 20px;
+  padding: 15px;
+  width: 180px;
+  text-align: center;
+}
+
+.record-container {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  position: relative;
+}
+
+.record {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.spin {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.needle {
+  position: absolute;
+  width: 90px;
+  top: -20px;
+  left: 60px;
+  transform-origin: top left;
+  transform: rotate(-30deg);
+  transition: transform 0.5s ease;
+}
+
+.needle.playing {
+  transform: rotate(0deg);
+}
+/* 🌸 FLOATING HEARTS & FLOWERS */
+.floating-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating {
+  position: absolute;
+  bottom: -50px;
+  font-size: 24px;
+  opacity: 0.8;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+.card,
+.player {
+  position: relative;
+  z-index: 2;
+}

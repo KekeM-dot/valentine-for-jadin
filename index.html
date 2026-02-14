@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine’s Day Jadin 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", cursive;
+  background: url("background.png") no-repeat center center fixed,
+              linear-gradient(#ffd6e8, #fff);
+  background-size: cover;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* 🌸 FLOATING BACKGROUND */
+.floating-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating {
+  position: absolute;
+  bottom: -40px;
+  font-size: 24px;
+  opacity: 0.8;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* 💌 CARD */
+.card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.92);
+  width: 320px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+h1 { color: #ff4d88; }
+
+.kitty-img {
+  width: 120px;
+  margin: 10px 0;
+}
+
+/* 🐱 KITTY AFFIRMATION */
+.affirmation-kitty {
+  cursor: pointer;
+  color: #cc3366;
+}
+
+.kitty-face {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.kitty-name {
+  display: block;
+  font-weight: bold;
+  color: #ff66a3;
+}
+
+button {
+  background: #ff66a3;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* 💕 AFFIRMATIONS */
+#affirmation-container {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.affirmation {
+  background: white;
+  border: 2px solid #ff66a3;
+  border-radius: 15px;
+  padding: 10px 15px;
+  color: #cc3366;
+  font-weight: bold;
+  margin-top: 10px;
+  animation: floatAffirm 3s ease forwards;
+}
+
+@keyframes floatAffirm {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-80px); }
+}
+
+.sparkle {
+  position: absolute;
+  animation: sparkleFade 1s ease forwards;
+}
+
+@keyframes sparkleFade {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* 🎵 MUSIC PLAYER */
+.player {
+  position: relative;
+  z-index: 2;
+  margin: 30px auto;
+}
+
+.record-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: #ffb6c1;
+  border-radius: 20px;
+  margin: auto;
+}
+
+.record {
+  width: 120px;
+  height: 120px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.record.playing {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.needle {
+  width: 6px;
+  height: 80px;
+  background: #444;
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  transform: rotate(-25deg);
+  transform-origin: top;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+
+.needle.playing {
+  transform: rotate(5deg);
+}
+
+.controls button {
+  margin: 10px 5px;
+}
+
+.song-title {
+  color: #cc3366;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="floating-bg"></div>
+
+<!-- 💖 CARD -->
+<div class="card">
+  <h1>Happy Valentine’s Day 💖</h1>
+  <img src="kitty.png" class="kitty-img">
+
+  <div class="affirmation-kitty" onclick="spawnAffirmation()">
+<pre class="kitty-face">
+ ♡   ♡
+ ( 🎀 )
+</pre>
+    <span class="kitty-name">For my beautiful lady. You deserve nothing but the best.
+</span>
+  </div>
+
+  <button onclick="showLove()">Click me 💌</button>
+  <p id="loveText"></p>
+</div>
+
+<div id="affirmation-container"></div>
+
+<!-- 🎵 PLAYER -->
+<div class="player">
+  <div class="record-container">
+    <img src="needle.png" class="needle" id="needle">
+    <img src="vinyl.png" class="record" id="record">
+  </div>
+
+  <p class="song-title" id="songTitle"></p>
+
+  <div class="controls">
+    <button onclick="prevSong()">⏮</button>
+    <button onclick="togglePlay()">▶️ / ⏸</button>
+    <button onclick="nextSong()">⏭</button>
+  </div>
+</div>
+
+<audio id="audio"></audio>
+
+<script src="player.js"></script>
+
+<script>
+/* 💗 LOVE TEXT */
+function showLove() {
+  document.getElementById("loveText").innerText =
+    "Hey bug,  there's so much I wanna tell you about how you make me feel but for now I want you to know how much I love and appropriate you. Something so simple like seeing you smile or hearing you laugh always brightens my day. I wouldn't still be at this school if it wasn't for you thank you I love you valentine's day!! 💗🎀";
+}
+
+/* 🌸 AFFIRMATIONS */
+const affirmations = [
+  "You are so special 💗",
+  "You make everything brighter 🌸",
+  "You are loved more than you know 🎀",
+  "You make my heart smile 💖"
+ 
+];
+
+function spawnAffirmation() {
+  const container = document.getElementById("affirmation-container");
+  const text = document.createElement("div");
+  text.className = "affirmation";
+  text.innerText = affirmations[Math.floor(Math.random() * affirmations.length)];
+  container.appendChild(text);
+  setTimeout(() => text.remove(), 3000);
+
+  for (let i = 0; i < 6; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.innerText = "✨";
+    sparkle.style.left = Math.random() * 100 + "px";
+    sparkle.style.top = Math.random() * 40 + "px";
+    container.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1000);
+  }
+}
+
+/* 🌸 FLOATING HEARTS & FLOWERS */
+const floatingBg = document.querySelector(".floating-bg");
+const symbols = ["💖","💕","🌸","🌷","🌼","🎀"];
+
+function spawnFloating() {
+  const el = document.createElement("div");
+  el.className = "floating";
+  el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = (5 + Math.random() * 5) + "s";
+  floatingBg.appendChild(el);
+  setTimeout(() => el.remove(), 10000);
+}
+
+setInterval(spawnFloating, 600);
+</script>
+
+</body>
+</html>
